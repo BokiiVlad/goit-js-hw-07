@@ -10,7 +10,7 @@ const elementArea = document.querySelector("#boxes");
 
 itemCreate.addEventListener("click", event => {
   const trueValue = Number(itemInput.value);
-  if (trueValue < 100 && trueValue > 0) {
+  if (trueValue <= 100 && trueValue >= 1) {
     createBox(trueValue);
     itemInput.value = "";
   } else { return; };
@@ -21,7 +21,9 @@ itemDestroy.addEventListener("click", event => {
 })
 
 const createBox = amount => {
+  elementArea.innerHTML = "";
   let size = 30;
+  const elementsList = [];
   for (let i = 0; i < amount; i++) {
     const boxItem = document.createElement("div");
     boxItem.style.height = `${size}px`;
@@ -29,9 +31,12 @@ const createBox = amount => {
     boxItem.style.backgroundColor = getRandomHexColor();
     boxItem.classList.add("box-item");
     size += 10;
-    elementArea.prepend(boxItem);
+    elementsList.push(boxItem);
   }
+  elementArea.append(...elementsList);
 }
+
+
 
 elementArea.classList.add("box-div");
 itemDestroy.classList.add("btn-destroy");
